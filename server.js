@@ -5,16 +5,29 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleTwo ={
-    title:'Article Two | Ritkim Mondal',
-    heading:'Article Two',
-    date:'Aug 3,2017',
-    content:
-    ` <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis nisi fugiat magni quos reprehenderit quasi consectetur dolor ex qui sapiente blanditiis similique esse corporis asperiores quibusdam aperiam, eum, sunt officia.</P>
-        <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quisquam, aperiam, atque cum, animi cupiditate vero non exercitationem magnam dolorum officiis nulla. Ab dignissimos ducimus eligendi nam odit, architecto quis.</P>
-        <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis nisi fugiat magni quos reprehenderit quasi consectetur dolor ex qui sapiente blanditiis similique esse corporis asperiores quibusdam aperiam, eum, sunt officia.</P>
-        <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quisquam, aperiam, atque cum, animi cupiditate vero non exercitationem magnam dolorum officiis nulla. Ab dignissimos ducimus eligendi nam odit, architecto quis.</P>
-        `
+var articles = {
+    var 'article-one' :{
+        title:'Article One | Ritkim Mondal',
+        heading:'Article One',
+        date:'Aug 3,2017',
+         content:
+        ` <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis nisi fugiat magni quos reprehenderit quasi consectetur dolor ex qui sapiente blanditiis similique esse corporis asperiores quibusdam aperiam, eum, sunt officia.</P> `
+    },
+    var 'article-two' :{
+        title:'Article Two | Ritkim Mondal',
+        heading:'Article Two',
+        date:'Aug 3,2017',
+        content:
+        ` <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis nisi fugiat magni quos reprehenderit quasi consectetur dolor ex qui sapiente blanditiis similique esse corporis asperiores quibusdam aperiam, eum, sunt officia.</P>`
+    },
+    var 'article-three' :{
+        title:'Article Three | Ritkim Mondal',
+        heading:'Article Three',
+        date:'Aug 3,2017',
+         content:
+        ` <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis nisi fugiat magni quos reprehenderit quasi consectetur dolor ex qui sapiente blanditiis similique esse corporis asperiores quibusdam aperiam, eum, sunt officia.</P>
+            <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quisquam, aperiam, atque cum, animi cupiditate vero non exercitationem magnam dolorum officiis nulla. Ab dignissimos ducimus eligendi nam odit, architecto quis.</P>`
+    }
 };
 function createTemplate(data)
 {
@@ -56,19 +69,14 @@ app.get('/ui/style.css', function (req, res) {
 });
 
 app.get('/ui/madi.png', function (req, res) {
+    var articleName=res.params.articleName;
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/article-one',function(req,res){
-   res.sendFile(path.join(__dirname, 'article-one.html'));
+app.get('/:articleName',function(req,res){
+    res.send(createTemplate(articles[articleName]));
 });
-app.get('/article-two',function(req,res){
-    res.send(createTemplate(articleTwo));
-});
-app.get('/article-three',function(req,res){
- res.sendFile(path.join(__dirname, 'article-three.html'));
-    
-});
+
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 
