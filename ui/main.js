@@ -5,6 +5,11 @@ element=innerHTML='New Value';
 
 //move the image
 var img=document.getElementById('madi');
-img.onClick=function(){
-  img.style.marginLeft='100px';  
+function moveRight(){
+    var marginLeft=0;
+    marginLeft+=10;
+    img.style.marginLeft=marginLeft+'px';
+    }
+  img.onClick=function(){
+      var interval=setInterval(moveRight,100);
 };
