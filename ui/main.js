@@ -43,8 +43,7 @@ button.onClick=function()
     // counter+=1;
 }
 //Submit Nmae
-var nameInput=document.getElementById('name');
-var name=nameInput.value;
+
 var submit=document.getElementById('submit_btn');
 submit.onClick = function(){
     
@@ -72,13 +71,12 @@ submit.onClick = function(){
         }
         //IF NOT
     };
+        var nameInput=document.getElementById('name');
+        var name=nameInput.value;
         //MAKE REQUEST 
         request.open('GET','http://riktimrules.imad.hasura-app.io/submit-name='+name,true);
         request.send(null);
     
     //RENDER THE VARIABLE IN CORRECT SPAN
     // counter+=1;
-    
-    
-  
-}
+};
