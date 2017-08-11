@@ -47,14 +47,38 @@ var nameInput=document.getElementById('name');
 var name=nameInput.value;
 var submit=document.getElementById('submit_btn');
 submit.onClick = function(){
-    //Make a request to the server and send the name
-    //Capture a lsit of name as render as a list
-    var names=['name1','name2'.'name3'];
-    var list='';
-    for(var i=0;i<names.length;i++)
-    {
-        list+='<li>'+names[i]+'</li>';
-    }
-    var ul=document.getELementById('namelist');
-    ul.innerHTML-list;
+    
+     //Create request object
+    var request =new XMLHTTPRequest();
+    //CAPTURE THE RESPOND AND STORE IT IN A VARIABLE
+    request.onreadystatechange=function(){
+        if(request.readyState==XMLHTTPRequest.DONE){
+            //TAKE SOME ACTION
+            if(request.status==200)//Cheching sucessful status
+            {
+                  //Make a request to the server and send the name
+                    //Capture a lsit of name as render as a list
+                    var names=request.responseText;
+                    names=JSON.parse(names);
+                    var list='';
+                    for(var i=0;i<names.length;i++)
+                    {
+                        list+='<li>'+names[i]+'</li>';
+                    }
+                    var ul=document.getELementById('namelist');
+                    ul.innerHTML=list;
+                
+            }
+        }
+        //IF NOT
+    };
+        //MAKE REQUEST 
+        request.open('GET','http://riktimrules.imad.hasura-app.io/submit-name='+name,true);
+        request.send(null);
+    
+    //RENDER THE VARIABLE IN CORRECT SPAN
+    // counter+=1;
+    
+    
+  
 }
